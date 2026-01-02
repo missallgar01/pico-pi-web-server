@@ -1,0 +1,36 @@
+<html>
+<body>
+<h1>My website</h1>
+
+<a href="{{url_for('index')}}">Home</a>
+
+<p>Stats</p>
+<button onclick="start();">Show Stats</button>
+ 
+<p id="temp1"></p>
+<p id="temp2"></p>
+  
+  <script>
+     function update(){
+            //Fetch is a command to make a HTTP request
+            fetch("/update").then(function(response){
+                return response.json();
+                
+            }).then (function(data){
+                    console.log(data);
+                    document.getElementById("temp1").innerText = data['temp1'];
+                    document.getElementById("temp2").innerText = data['temp2'];
+                }).catch(function(err){
+                    console.log(err.message);
+                });
+        }
+    function start(){
+      setInterval(update, 1000);
+    }
+    </script>
+  
+     
+    </script>
+
+</body>
+</html>
